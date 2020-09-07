@@ -5,20 +5,17 @@
       app
     >
       <v-list dense>
-        <v-list-item link>
+        <v-list-item
+        v-for="item in items"
+        :key="item.name"
+        :to="item.link"
+        link
+        >
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-email</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -39,7 +36,19 @@
 export default {
   name: 'NavBar',
   data: () => ({
-    drawer: false
+    drawer: false,
+    items: [
+      {
+        name: 'home',
+        icon: 'mdi-home',
+        link: '/'
+      },
+      {
+        name: 'about',
+        icon: 'mdi-information',
+        link: '/about'
+      }
+    ]
   })
 }
 </script>
