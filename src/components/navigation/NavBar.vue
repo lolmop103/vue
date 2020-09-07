@@ -47,6 +47,11 @@ export default {
         name: 'about',
         icon: 'mdi-information',
         link: '/about'
+      },
+      {
+        name: 'todo',
+        icon: 'mdi-clipboard-list',
+        link: '/todo'
       }
     ]
   })
