@@ -2,27 +2,19 @@
   <div class="todo">
       <v-container>
           <h1>the todo list</h1>
-        <v-card>
-            <v-card-title>Task1</v-card-title>
-            <v-card-text>description task1</v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                color="red"
-                icon
-                >
-                <v-icon>mdi-delete-circle</v-icon>
-                </v-btn>
-
-            </v-card-actions>
-        </v-card>
+          <Task v-bind:title="'task1'" v-bind:description="'description for task1'"/>
       </v-container>
   </div>
 </template>
 
 <script>
-export default {
+import Task from '@/components/Task'
 
+export default {
+  name: 'ToDo',
+  components: {
+    Task
+  }
 }
 </script>
 
