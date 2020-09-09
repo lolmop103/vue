@@ -2,6 +2,7 @@
   <div class="home">
     <v-container>
       <h1>Welcome to the ToDo Application</h1>
+      <v-divider></v-divider>
       <p>All ToDo Tasks</p>
     </v-container>
   </div>
