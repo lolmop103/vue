@@ -1,6 +1,11 @@
 <template>
   <div id="Task">
-    <v-card>
+    <v-hover
+     v-slot:default="{ hover }"
+     >
+      <v-card
+       :elevation="hover ? 10 : 5"
+       >
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>{{ description }}</v-card-text>
         <v-card-actions>
@@ -12,7 +17,8 @@
             <v-icon>mdi-delete-circle</v-icon>
             </v-btn>
         </v-card-actions>
-    </v-card>
+      </v-card>
+    </v-hover>
   </div>
 </template>
 
