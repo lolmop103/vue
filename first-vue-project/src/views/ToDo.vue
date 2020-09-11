@@ -3,18 +3,32 @@
       <v-container>
           <h1>the todo list</h1>
           <v-row>
-            <v-col align="center">
-              <h2>To do</h2>
-              <Task v-bind:title="'task1'" v-bind:description="'description for task1'"/>
-            </v-col>
+            <TaskColumn v-bind:title="'To do'">
+              <Task
+                v-for="task in tasks[0]"
+                :key="task.title"
+                v-bind:title="task.title"
+                v-bind:description="task.description"
+              />
+            </TaskColumn>
             <v-divider vertical></v-divider>
-            <v-col align="center">
-              <h2>Doing</h2>
-            </v-col>
+            <TaskColumn v-bind:title="'Doing'">
+              <Task
+                v-for="task in tasks[1]"
+                :key="task.title"
+                v-bind:title="task.title"
+                v-bind:description="task.description"
+              />
+            </TaskColumn>
             <v-divider vertical></v-divider>
-            <v-col align="center">
-              <h2>Done</h2>
-            </v-col>
+            <TaskColumn v-bind:title="'Done'">
+              <Task
+                v-for="task in tasks[2]"
+                :key="task.title"
+                v-bind:title="task.title"
+                v-bind:description="task.description"
+              />
+            </TaskColumn>
           </v-row>
       </v-container>
   </div>
@@ -22,12 +36,54 @@
 
 <script>
 import Task from '@/components/Task'
+import TaskColumn from '@/components/layout/TaskColumn'
 
 export default {
   name: 'ToDo',
   components: {
-    Task
-  }
+    Task,
+    TaskColumn
+  },
+  data: () => ({
+    tasks: [
+      [
+        {
+          id: 1,
+          title: 'Task 1',
+          description: 'This is the description of task 1'
+        }
+      ],
+      [
+        {
+          id: 1,
+          title: 'Task 1',
+          description: 'This is the description of task 1'
+        },
+        {
+          id: 2,
+          title: 'Task 2',
+          description: 'This is the description of task 2'
+        },
+        {
+          id: 3,
+          title: 'Task 3',
+          description: 'This is the description of task 3'
+        }
+      ],
+      [
+        {
+          id: 1,
+          title: 'Task 1',
+          description: 'This is the description of task 1'
+        },
+        {
+          id: 2,
+          title: 'Task 2',
+          description: 'This is the description of task 2'
+        }
+      ]
+    ]
+  })
 }
 </script>
 
