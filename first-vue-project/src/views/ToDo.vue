@@ -2,6 +2,11 @@
   <div class="todo">
       <v-container>
           <h1>the todo list</h1>
+          <v-toolbar dense elevation="2">
+            <v-btn icon>
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </v-toolbar>
           <v-row>
             <TaskColumn v-bind:title="'To do'">
               <Task
@@ -11,7 +16,6 @@
                 v-bind:description="task.description"
               />
             </TaskColumn>
-            <v-divider vertical></v-divider>
             <TaskColumn v-bind:title="'Doing'">
               <Task
                 v-for="task in tasks[1]"
@@ -20,7 +24,6 @@
                 v-bind:description="task.description"
               />
             </TaskColumn>
-            <v-divider vertical></v-divider>
             <TaskColumn v-bind:title="'Done'">
               <Task
                 v-for="task in tasks[2]"
@@ -29,6 +32,7 @@
                 v-bind:description="task.description"
               />
             </TaskColumn>
+            <v-divider vertical></v-divider>
           </v-row>
       </v-container>
   </div>
