@@ -16,21 +16,21 @@
         <v-card-text>
             <v-form>
                 <v-text-field
-                 v-model="title"
+                 v-model="input.title"
                  label="'title"
                  required
                 >
                 </v-text-field>
 
                 <v-textarea
-                 v-model="description"
+                 v-model="input.description"
                  label="description"
                  required
                 >
                 </v-textarea>
 
                 <v-checkbox
-                 v-model="doing"
+                 v-model="input.doing"
                  label="Task in doing"
                  required
                 >
@@ -38,7 +38,7 @@
 
                 <v-btn text
                  class="mr-4"
-                 @click="dialog=false"
+                 @click="create"
                 >
                     Create task
                 </v-btn>
@@ -57,10 +57,35 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data: () => ({
-    dialog: false
-  })
+    dialog: false,
+    input: {
+      title: '',
+      description: '',
+      doing: false
+    }
+  }),
+  methods: {
+    create () {
+      let state = 'ToDo'
+
+      if (this.input.doing) {
+        state = 'Doing'
+      }
+
+      axios.post('http://todo.test/api/tasks/add', {
+        title: this.input.title,
+        description: this.input.description,
+        state: state
+      }).then((response) => {
+        console.log(response.data)
+        this.dialog = false
+      })
+    }
+  }
 }
 </script>
 
