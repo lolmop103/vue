@@ -3,9 +3,7 @@
       <v-container>
           <h1>the todo list</h1>
           <v-toolbar dense elevation="2">
-            <v-btn icon>
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
+            <TaskCreateDialog />
           </v-toolbar>
           <v-row>
             <TaskColumn v-bind:title="'To do'">
@@ -41,12 +39,14 @@
 <script>
 import Task from '@/components/Task'
 import TaskColumn from '@/components/layout/TaskColumn'
+import TaskCreateDialog from '@/components/dialogs/TaskCreateDialog'
 
 export default {
   name: 'ToDo',
   components: {
     Task,
-    TaskColumn
+    TaskColumn,
+    TaskCreateDialog
   },
   data: () => ({
     tasks: [

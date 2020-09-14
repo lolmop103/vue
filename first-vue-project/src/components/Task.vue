@@ -9,13 +9,8 @@
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>{{ description }}</v-card-text>
         <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-            color="red"
-            icon
-            >
-            <v-icon>mdi-delete-circle</v-icon>
-            </v-btn>
+          <v-spacer></v-spacer>
+          <DeleteTaskPopup />
         </v-card-actions>
       </v-card>
     </v-hover>
@@ -23,8 +18,13 @@
 </template>
 
 <script>
+import DeleteTaskPopup from '@/components/popups/DeleteTaskPopup'
+
 export default {
   name: 'Task',
+  components: {
+    DeleteTaskPopup
+  },
   props: ['title', 'description']
 }
 </script>
