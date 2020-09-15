@@ -15,7 +15,7 @@
     <v-card>
         <v-card-title>Create Task</v-card-title>
         <v-progress-linear
-          :active="active"
+          :active="progressBarActive"
           indeterminate
           color="light-blue"
         ></v-progress-linear>
@@ -23,7 +23,7 @@
             <v-form>
                 <v-text-field
                  v-model="input.title"
-                 label="'title"
+                 label="title"
                  required
                 >
                 </v-text-field>
@@ -45,15 +45,15 @@
                 <v-btn text
                  class="mr-4"
                  @click="create"
-                 :disabled="disabled"
+                 :disabled="buttonDisabled"
                 >
                     Create task
                 </v-btn>
 
                 <v-btn text
                  class="mr-4"
-                 @click="dialog=false"
-                 :disabled="disabled"
+                 @click="clearDialog"
+                 :disabled="buttonDisabled"
                  align="center"
                 >
                     Cancel
@@ -70,8 +70,8 @@ import axios from 'axios'
 export default {
   data: () => ({
     dialog: false,
-    disabled: false,
-    active: false,
+    buttonDisabled: false,
+    progressBarActive: false,
     input: {
       title: '',
       description: '',
@@ -79,14 +79,6 @@ export default {
     }
   }),
   methods: {
-    wait () {
-      this.disabled = true
-      this.active = true
-    },
-    resume () {
-      this.disabled = false
-      this.active = false
-    },
     create () {
       this.wait()
       let state = 'ToDo'
@@ -101,9 +93,26 @@ export default {
         state: state
       }).then((response) => {
         console.log(response.data)
-        this.dialog = false
+        this.clearDialog()
         this.resume()
       })
+    },
+
+    wait () {
+      this.buttonDisabled = true
+      this.progressBarActive = true
+    },
+
+    resume () {
+      this.buttonDisabled = false
+      this.progressBarActive = false
+    },
+
+    clearDialog () {
+      this.dialog = false
+      this.input.title = ''
+      this.input.description = ''
+      this.input.doing = false
     }
   }
 }
