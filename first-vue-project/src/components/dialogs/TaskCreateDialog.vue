@@ -1,6 +1,7 @@
 <template>
  <v-dialog
   v-model="dialog"
+  persistent
   max-width="55vw"
  >
     <template v-slot:activator="{ on, attrs }">
@@ -13,6 +14,11 @@
     </template>
     <v-card>
         <v-card-title>Create Task</v-card-title>
+        <v-progress-linear
+          :active="active"
+          indeterminate
+          color="light-blue"
+        ></v-progress-linear>
         <v-card-text>
             <v-form>
                 <v-text-field
@@ -39,6 +45,7 @@
                 <v-btn text
                  class="mr-4"
                  @click="create"
+                 :disabled="disabled"
                 >
                     Create task
                 </v-btn>
@@ -46,6 +53,7 @@
                 <v-btn text
                  class="mr-4"
                  @click="dialog=false"
+                 :disabled="disabled"
                  align="center"
                 >
                     Cancel
@@ -62,6 +70,8 @@ import axios from 'axios'
 export default {
   data: () => ({
     dialog: false,
+    disabled: false,
+    active: false,
     input: {
       title: '',
       description: '',
@@ -69,7 +79,16 @@ export default {
     }
   }),
   methods: {
+    wait () {
+      this.disabled = true
+      this.active = true
+    },
+    resume () {
+      this.disabled = false
+      this.active = false
+    },
     create () {
+      this.wait()
       let state = 'ToDo'
 
       if (this.input.doing) {
@@ -83,6 +102,7 @@ export default {
       }).then((response) => {
         console.log(response.data)
         this.dialog = false
+        this.resume()
       })
     }
   }
