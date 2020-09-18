@@ -87,7 +87,7 @@ export default {
         state = 'Doing'
       }
 
-      axios.post('http://todo.test/api/tasks/add', {
+      axios.post('http://todo.test/api/v1/tasks/add', {
         title: this.input.title,
         description: this.input.description,
         state: state
