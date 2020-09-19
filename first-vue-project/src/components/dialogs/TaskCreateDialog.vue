@@ -42,6 +42,10 @@
                 >
                 </v-checkbox>
 
+                <v-alert v-if="error.state" type="error">
+                  {{error.message}}
+                </v-alert>
+
                 <v-btn text
                  class="mr-4"
                  @click="create"
@@ -72,6 +76,10 @@ export default {
     dialog: false,
     buttonDisabled: false,
     progressBarActive: false,
+    error: {
+      state: false,
+      message: ''
+    },
     input: {
       title: '',
       description: '',
@@ -87,14 +95,17 @@ export default {
         state = 'Doing'
       }
 
-      axios.post('http://todo.test/api/v1/tasks/add', {
+      axios.post(`http://${process.env.VUE_APP_API_HOST}/api/v${process.env.VUE_APP_API_VERSION}/tasks/add`, {
         title: this.input.title,
         description: this.input.description,
         state: state
       }).then((response) => {
-        console.log(response.data)
+        console.log('response.data')
         this.clearDialog()
         this.resume()
+      }).catch(error => {
+        console.log('error')
+        console.log(error.response)
       })
     },
 
