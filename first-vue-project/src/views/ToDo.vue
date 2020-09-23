@@ -40,6 +40,7 @@
 import Task from '@/components/Task'
 import TaskColumn from '@/components/layout/TaskColumn'
 import TaskCreateDialog from '@/components/dialogs/TaskCreateDialog'
+import axios from 'axios'
 
 export default {
   name: 'ToDo',
@@ -47,6 +48,28 @@ export default {
     Task,
     TaskColumn,
     TaskCreateDialog
+  },
+  created () {
+    console.log('hello')
+    this.init()
+  },
+  methods: {
+    init () {
+      console.log('initialized')
+      axios.get(`http://${process.env.VUE_APP_API_HOST}/api/v${process.env.VUE_APP_API_VERSION}/tasks`)
+        .then((response) => {
+          this.getAllTasks(response.data.last_page)
+        })
+    },
+    getAllTasks (lastPage) {
+      for (let i = 1; i <= lastPage; i++) {
+        axios.get(`http://${process.env.VUE_APP_API_HOST}/api/v${process.env.VUE_APP_API_VERSION}/tasks?page=${i}`)
+          .then((response) => {
+            response.data.data.forEach(task => {
+            })
+          })
+      }
+    }
   },
   data: () => ({
     tasks: [
