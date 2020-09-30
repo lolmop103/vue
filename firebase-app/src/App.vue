@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MessageSend from './components/MessageSend';
+import MessageSend from './components/Message';
 
 export default {
   name: 'App',
