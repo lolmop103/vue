@@ -7,4 +7,3 @@ firebase.initializeApp(config.firedatabase);
 const database = firebase.database();
 
 export default database;
-//this is a change
