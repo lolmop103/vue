@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import PlainMessagesView from '../views/PlainMessagesView.vue'
 import FiredatabaseMessagesView from '../views/FiredatabaseMessagesView.vue'
+import FirestoreMessagesView from '../views/FirestoreMessagesView.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/firedatabase-messages',
     name: 'FiredatabaseMessages',
     component: FiredatabaseMessagesView
+  },
+  {
+    path: '/firestore-messages',
+    name: 'FirestoreMessages',
+    component: FirestoreMessagesView
   },
   {
     path: '/about',
