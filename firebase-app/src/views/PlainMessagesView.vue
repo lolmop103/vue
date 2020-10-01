@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Messages from '@/components/Messages.vue'
+import Messages from '@/modules/messages/components/Messages.vue'
 
 export default {
     name: "PlainMessagesView",
